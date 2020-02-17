@@ -237,7 +237,12 @@ kubeadm config print addon-defaults
 Similar U/X can be expected for `kubeadm config migrate` and `kubeadm config view`
 
 The user may extend the default kubeadm config using the `AddonInstallerConfiguration` kind.
-The API details are still being finalized. Usage may look like this:
+The API details are still being finalized.
+
+Addons can be provided via plain manifests or kustomize refs for now and Cluster Addons is
+looking into other solutions to making this straight-forward.
+
+Usage may look like this:
 
 ```yaml
 ---
@@ -376,6 +381,8 @@ In general, we try to use the same stages (alpha, beta, GA), regardless how the 
 - Support for API-driven ComponentConfig declaration of addons is working in kubeadm for init and upgrade.
 - ClusterAPI implementations may begin experimenting with producing more functional clusters as a result.
 - Users and vendors can provide feedback.
+- Current kube-proxy and CoreDNS addon deployment logic is untouched.
+  - Work on operators for these is in-progress.
 
 ##### Alpha -> Beta Graduation
 
@@ -383,7 +390,8 @@ In general, we try to use the same stages (alpha, beta, GA), regardless how the 
 - Complete features A, B, C
 - Tests are in Testgrid and linked in KEP -->
 
-TODO
+- Users of addon functionality will get kube-proxy / CoreDNS through addon installer functionality.
+- Addons (operators if necessary) available from relevant upstream groups.
 
 ##### Beta -> GA Graduation
 
@@ -395,6 +403,8 @@ TODO
 **Note:** Generally we also wait at least 2 releases between beta and GA/stable, since there's no opportunity for user feedback, or even bug reports, in back-to-back releases. -->
 
 The current user-experience for installing the three current "core" addons with kubeadm, either by default or with user specification becomes equivalent or improved in safety and U/X when kubeadm uses the `AddonInstallerConfiguration`.
+
+Docs, release cadence and lifecycle of core addons is agreed on by all groups.
 
 ##### Removing a deprecated flag
 
